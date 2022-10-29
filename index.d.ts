@@ -82,7 +82,7 @@ export function read(
   fetchOptions?: FetchOptions,
 ): Promise<FeedData>;
 
-export function read(
+export function parse(
   data: string | Record<string, unknown>,
   options?: ReaderOptions,
 ): Promise<FeedData>;

@@ -1,4 +1,4 @@
-// feed-reader@6.1.2, by @ndaidong - built with esbuild at 2022-10-29T01:55:13.503Z - published under MIT license
+// feed-reader@6.1.2, by @ndaidong - built with esbuild at 2022-10-29T02:04:05.611Z - published under MIT license
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -2334,7 +2334,7 @@ var parse = (data, type, options = {}) => {
     getExtraFeedFields,
     getExtraEntryFields
   };
-  if (typeof data != "string") {
+  if (typeof data !== "string") {
     return parseJsonFeed_default(data, opts);
   }
   if (!validate(data)) {
