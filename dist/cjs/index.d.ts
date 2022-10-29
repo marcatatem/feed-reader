@@ -76,4 +76,13 @@ export interface FetchOptions {
   proxy?: ProxyConfig;
 }
 
-export function read(url: string, options?: ReaderOptions, fetchOptions?: FetchOptions): Promise<FeedData>;
+export function read(
+  url: string,
+  options?: ReaderOptions,
+  fetchOptions?: FetchOptions,
+): Promise<FeedData>;
+
+export function read(
+  data: string | Record<string, unknown>,
+  options?: ReaderOptions,
+): Promise<FeedData>;

@@ -11,6 +11,40 @@ import parseJsonFeed from './utils/parseJsonFeed.js'
 import parseRssFeed from './utils/parseRssFeed.js'
 import parseAtomFeed from './utils/parseAtomFeed.js'
 
+export const parse = (data, type, options = {}) => {
+  const {
+    normalization = true,
+    descriptionMaxLen = 210,
+    useISODateFormat = true,
+    xmlParserOptions = {},
+    getExtraFeedFields = () => ({}),
+    getExtraEntryFields = () => ({})
+  } = options
+
+  const opts = {
+    normalization,
+    descriptionMaxLen,
+    useISODateFormat,
+    getExtraFeedFields,
+    getExtraEntryFields
+  }
+
+  if (typeof data !== 'string') {
+    return parseJsonFeed(data, opts)
+  }
+
+  if (!validate(data)) {
+    throw new Error('The XML document is not well-formed')
+  }
+
+  const xml = xml2obj(data, xmlParserOptions)
+  return isRSS(xml)
+    ? parseRssFeed(xml, opts)
+    : isAtom(xml)
+      ? parseAtomFeed(xml, opts)
+      : null
+}
+
 export const read = async (url, options = {}, fetchOptions = {}) => {
   if (!isValidUrl(url)) {
     throw new Error('Input param must be a valid URL')
